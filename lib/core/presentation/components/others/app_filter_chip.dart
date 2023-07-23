@@ -9,6 +9,8 @@ class AppFilterChip extends StatelessWidget {
   final Color backgroundColor;
   final Color selectedColor;
   final Color selectedTextColor;
+  final Color unselectedBackgroundColor;
+  final Color unselectedBorderColor;
   final String label;
   final double? width;
   final double? height;
@@ -26,6 +28,8 @@ class AppFilterChip extends StatelessWidget {
     required this.selected,
     this.selectedColor = Colors.white,
     this.backgroundColor = Colors.white,
+    this.unselectedBackgroundColor = AppColor.white2,
+    this.unselectedBorderColor = AppColor.white2,
     this.selectedTextColor = Colors.white,
     this.showCheckmark = false,
     this.width,
@@ -43,9 +47,9 @@ class AppFilterChip extends StatelessWidget {
       avatar: icon,
       elevation: selected ? 1.5 : 0.0,
       side: BorderSide(
-        color: selected ? borderColor : AppColor.white2,
+        color: selected ? borderColor : unselectedBorderColor,
       ),
-      backgroundColor: selected ? backgroundColor : AppColor.white2,
+      backgroundColor: selected ? backgroundColor : unselectedBackgroundColor,
       selectedColor: selectedColor,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(9.r),
