@@ -6,4 +6,5 @@ abstract class RouteName {
   static const home = '/home';
   static const request = '/request';
   static const adminApprob = '/admin_approb';
+  static const vacations = '/vacations';
 }
