@@ -5,13 +5,14 @@ import '../../features/auth/presentation/auth_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/new_request/presentation/new_request_screen.dart';
 import '../../features/subscription/presentation/subscription_screen.dart';
+import '../../features/vacations_list/presentation/vacation_search_screen.dart';
 import '../../features/vacations_list/presentation/vacations_list_screen.dart';
 import '../../features/welcome/welcome_screen.dart';
 import '../utils/constants/route_name.dart';
 
 class AppRouter {
   static GoRouter configurations = GoRouter(
-    initialLocation: RouteName.vacations,
+    initialLocation: RouteName.search,
     routes: [
       GoRoute(
         path: RouteName.welcome,
@@ -44,6 +45,10 @@ class AppRouter {
       GoRoute(
         path: RouteName.vacations,
         builder: (context, state) => const VacationsListScreen(),
+      ),
+      GoRoute(
+        path: RouteName.search,
+        builder: (context, state) => const VacationSearchScreen(),
       ),
     ],
   );
