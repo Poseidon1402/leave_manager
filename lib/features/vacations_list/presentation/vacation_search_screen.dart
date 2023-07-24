@@ -17,6 +17,7 @@ class VacationSearchScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 44.h,),
             _buildSearchField(context),
             SizedBox(
               height: 34.h,

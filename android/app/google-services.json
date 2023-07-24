@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914012150508",
+    "project_id": "leavingmanager",
+    "storage_bucket": "leavingmanager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914012150508:android:3fef71dec32955737da3c9",
+        "android_client_info": {
+          "package_name": "com.eni.leave_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914012150508-k6fma79ltmk68206ntett772kim9bts4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJ5LmrMq14KhkwsY9F21JI_GhmVhANvv0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914012150508-k6fma79ltmk68206ntett772kim9bts4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
