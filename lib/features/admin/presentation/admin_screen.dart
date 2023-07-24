@@ -1,8 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/utils/constants/app_color.dart';
+import '../../admin_approb/presentation/admin_approb_screen.dart';
+import '../../vacations_list/presentation/vacation_search_screen.dart';
+import '../../vacations_list/presentation/vacations_list_screen.dart';
 
 class AdminScreen extends StatefulWidget {
   const AdminScreen({super.key});
@@ -13,8 +17,12 @@ class AdminScreen extends StatefulWidget {
 
 class _AdminScreenState extends State<AdminScreen> {
   static const _screens = [
-
+    AdminApprobScreen(),
+    VacationSearchScreen(),
+    VacationsListScreen(),
   ];
+  int _currentIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +46,81 @@ class _AdminScreenState extends State<AdminScreen> {
           ),
         ],
       ),
+      body: _screens[_currentIndex],
       backgroundColor: AppColor.white1,
-      bottomNavigationBar: ClipRRect(
-
+      bottomNavigationBar: FractionallySizedBox(
+        widthFactor: 0.9,
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: 10.h,
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12.r),
+            child: BottomNavigationBar(
+              backgroundColor: Colors.white,
+              elevation: 1.0,
+              showUnselectedLabels: false,
+              showSelectedLabels: false,
+              currentIndex: _currentIndex,
+              unselectedFontSize: 0.0,
+              onTap: (index) => setState(() => index < 3 ? _currentIndex = index : _currentIndex = 2),
+              items: [
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.listCheck,
+                    color: AppColor.grey4,
+                    size: 39.sp,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.listCheck,
+                    color: AppColor.blue1,
+                    size: 39.sp,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.solidCalendar,
+                    color: AppColor.grey4,
+                    size: 39.sp,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.solidCalendar,
+                    color: AppColor.blue1,
+                    size: 39.sp,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    FontAwesomeIcons.clipboardList,
+                    color: AppColor.grey4,
+                    size: 39.sp,
+                  ),
+                  activeIcon: Icon(
+                    FontAwesomeIcons.clipboardList,
+                    color: AppColor.blue1,
+                    size: 39.sp,
+                  ),
+                  label: '',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(
+                    Icons.settings_sharp,
+                    color: AppColor.grey4,
+                    size: 39.sp,
+                  ),
+                  activeIcon: Icon(
+                    Icons.settings_sharp,
+                    color: AppColor.blue1,
+                    size: 39.sp,
+                  ),
+                  label: '',
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
