@@ -1,5 +1,6 @@
 import 'package:go_router/go_router.dart';
 
+import '../../features/admin/presentation/admin_screen.dart';
 import '../../features/admin_approb/presentation/admin_approb_screen.dart';
 import '../../features/auth/presentation/auth_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
@@ -12,7 +13,7 @@ import '../utils/constants/route_name.dart';
 
 class AppRouter {
   static GoRouter configurations = GoRouter(
-    initialLocation: RouteName.search,
+    initialLocation: RouteName.admin,
     routes: [
       GoRoute(
         path: RouteName.welcome,
@@ -49,6 +50,10 @@ class AppRouter {
       GoRoute(
         path: RouteName.search,
         builder: (context, state) => const VacationSearchScreen(),
+      ),
+      GoRoute(
+        path: RouteName.admin,
+        builder: (context, state) => const AdminScreen(),
       ),
     ],
   );

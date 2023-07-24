@@ -15,7 +15,7 @@ class WelcomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/Leave manager.webp',
+          'assets/logo1.webp',
           width: 179.w,
           height: 46.h,
           fit: BoxFit.fill,
@@ -32,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
             Flexible(
               flex: 5,
               child: Image.asset(
-                'assets/Leave manager img.webp',
+                'assets/logo2.webp',
                 width: 468.w,
                 height: 351.h,
               ),

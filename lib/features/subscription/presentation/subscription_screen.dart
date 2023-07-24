@@ -13,7 +13,7 @@ class SubscriptionScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Image.asset(
-          'assets/Leave manager.webp',
+          'assets/logo1.webp',
           width: 179.w,
           height: 46.h,
           fit: BoxFit.fill,
