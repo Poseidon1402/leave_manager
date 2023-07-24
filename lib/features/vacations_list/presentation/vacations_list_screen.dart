@@ -3,13 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/presentation/components/others/app_filter_chip.dart';
 import '../../../core/utils/constants/app_color.dart';
+import 'components/employee_on_vacation.dart';
 
 class VacationsListScreen extends StatelessWidget {
   const VacationsListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -33,9 +33,9 @@ class VacationsListScreen extends StatelessWidget {
               Text(
                 'Département',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: AppColor.grey2,
-                ),
+                      fontWeight: FontWeight.w500,
+                      color: AppColor.grey2,
+                    ),
               ),
               SizedBox(
                 height: 10.h,
@@ -88,17 +88,17 @@ class VacationsListScreen extends StatelessWidget {
                         TextSpan(
                           text: 'Mois de : ',
                           style:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: AppColor.grey2,
-                          ),
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    color: AppColor.grey2,
+                                  ),
                         ),
                         TextSpan(
                           text: 'Septembre 2023',
                           style:
-                          Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            fontWeight: FontWeight.w600,
-                            color: AppColor.grey2,
-                          ),
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: AppColor.grey2,
+                                  ),
                         ),
                       ],
                     ),
@@ -113,11 +113,24 @@ class VacationsListScreen extends StatelessWidget {
                     label: Text(
                       'Filtrer',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        color: Colors.black.withOpacity(0.4),
-                      ),
+                            color: Colors.black.withOpacity(0.4),
+                          ),
                     ),
                   ),
                 ],
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return const EmployeeOnVacation(
+                      name: 'Moussa Diop',
+                      reason: 'Malade',
+                      from: 'Sam 23',
+                      to: 'Mar 26',
+                    );
+                  },
+                ),
               ),
             ],
           ),
