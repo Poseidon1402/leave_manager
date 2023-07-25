@@ -28,8 +28,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: event.email,
         password: event.password,
       );
-      _rep.getUserByEmail(event.email)
-        .then((user) => emit(AuthState.success(user)));
+      final user = await _rep.getUserByEmail(event.email);
+      emit(AuthState.success(user));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         emit(const AuthState.error('Aucun utilisateur trouvé pour cet email.'));
