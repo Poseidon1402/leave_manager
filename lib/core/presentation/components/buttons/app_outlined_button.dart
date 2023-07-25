@@ -39,6 +39,7 @@ class AppOutlinedButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 12.r),
         ),
+        elevation: 0.0,
         fixedSize: Size(fixedWidth, fixedHeight ?? 55.h),
       ),
       child: Text(

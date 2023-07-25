@@ -52,9 +52,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         email: event.user.email,
         password: event.password,
       );
-      UserEntity user = await _rep.getUserByEmail(event.user.email);
-      await _firestore.add(user.toJson());
-      emit(AuthState.success(user));
+      await _firestore.add(event.user.toJson());
+      emit(AuthState.success(event.user));
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         emit(const AuthState.error('Le mot de passe est trop faible.'));
