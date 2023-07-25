@@ -8,6 +8,6 @@ class DepartmentEntity {
   factory DepartmentEntity.fromJson(Map<String, dynamic> json) => DepartmentEntity(name: json['name']);
 
   Map<String, String> toJson() => {
-    name: name,
+    "name": name,
   };
 }

@@ -31,7 +31,6 @@ class RoundedTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return TextFormField(
       obscureText: obscureText,
       validator: validator,
@@ -42,17 +41,26 @@ class RoundedTextField extends StatelessWidget {
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
-          borderSide: borderSide ?? const BorderSide(
-            color: Colors.transparent,
-            width: 1.0,
-          ),
+          borderSide: borderSide ??
+              const BorderSide(
+                color: Colors.transparent,
+                width: 1.0,
+              ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
+          borderSide: borderSide ??
+              const BorderSide(
+                color: Colors.transparent,
+                width: 1.0,
+              ),
         ),
         filled: true,
         fillColor: Colors.white,
         hintText: hintText,
         hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
-          color: Colors.black.withOpacity(0.4),
-        ),
+              color: Colors.black.withOpacity(0.4),
+            ),
         prefixIcon: Icon(
           prefixIcon,
           size: 24.sp,
