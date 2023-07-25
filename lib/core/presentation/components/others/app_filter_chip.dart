@@ -12,6 +12,7 @@ class AppFilterChip extends StatelessWidget {
   final Color unselectedBackgroundColor;
   final Color unselectedBorderColor;
   final String label;
+  final Function(bool)? onSelected;
   final double? width;
   final double? height;
   final bool showCheckmark;
@@ -26,6 +27,7 @@ class AppFilterChip extends StatelessWidget {
     this.borderColor = Colors.transparent,
     this.label = '',
     required this.selected,
+    this.onSelected,
     this.selectedColor = Colors.white,
     this.backgroundColor = Colors.white,
     this.unselectedBackgroundColor = AppColor.white2,
@@ -42,7 +44,7 @@ class AppFilterChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FilterChip(
-      onSelected: (value) {},
+      onSelected: onSelected,
       selected: selected,
       avatar: icon,
       elevation: selected ? 1.5 : 0.0,
