@@ -18,6 +18,7 @@ class PauseManageBloc extends Bloc<PauseManageEvent, PauseManageState> {
   void _mapPauseInsertionEventToState(
       PauseInsertionEvent event, Emitter<PauseManageState> emit) async {
     try {
+      emit(PauseManageState.loading());
       await _rep.insert(event.pause);
       emit(PauseManageState.success());
     } catch (e) {

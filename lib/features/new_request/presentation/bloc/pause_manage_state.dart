@@ -20,5 +20,5 @@ class PauseManageState extends Equatable {
   factory PauseManageState.networkError() => const PauseManageState(status: LoadStatus.networkError);
 
   @override
-  List<Object?> get props => ['status'];
+  List<Object?> get props => [status];
 }

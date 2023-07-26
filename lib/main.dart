@@ -26,6 +26,7 @@ class LeaveManager extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
+
       ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp.router(
