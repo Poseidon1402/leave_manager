@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:leave_manager/core/utils/enum/load_status.dart';
 
+import '../../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../../core/presentation/components/others/app_filter_chip.dart';
 import '../../../../core/utils/constants/app_color.dart';
 import 'pause.dart';
@@ -94,29 +98,35 @@ class _HomeBodyState extends State<HomeBody> {
             SizedBox(
               height: 23.h,
             ),
-            Text(
-              'Septembre 2023',
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColor.grey2,
-                    fontWeight: FontWeight.w600,
-                  ),
-            ),
-            const FractionallySizedBox(
-              widthFactor: 1,
-              child: Pause(
-                cause: 'À cause de ma santé',
-                date: 'Samedi 23 Septembre',
-                type: 'Malade',
-                approved: true,
-              ),
-            ),
-            const FractionallySizedBox(
-              widthFactor: 1,
-              child: Pause(
-                cause: 'Réunion',
-                date: 'Vendredi 08 Septembre',
-                type: 'Réunion',
-                approved: true,
+            Expanded(
+              child: BlocBuilder<PauseBloc, PauseState>(
+                bloc: context.read<PauseBloc>()..add(PauseFetchingEvent()),
+                builder: (context, state) {
+                  if(state.status.isLoading) {
+                    return Center(
+                      child: SpinKitRing(
+                        color: AppColor.blue1,
+                        size: 30.sp,
+                      ),
+                    );
+                  } else if(state.status.isSuccess) {
+                    return ListView.builder(
+                      itemCount: state.pauses?.length,
+                      itemBuilder: (context, index) {
+                        return Pause(
+                          pause: state.pauses![index],
+                        );
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: Text(
+                        'Something went wrong',
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    );
+                  }
+                }
               ),
             ),
           ],

@@ -8,6 +8,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'app_theme.dart';
 import 'core/navigation/app_router.dart';
 import 'core/presentation/bloc/auth/auth_bloc.dart';
+import 'core/presentation/bloc/pause/pause_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,9 @@ class LeaveManager extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => AuthBloc()),
-
+        BlocProvider(
+          create: (context) => PauseBloc(),
+        ),
       ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp.router(

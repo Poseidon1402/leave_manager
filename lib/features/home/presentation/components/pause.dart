@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../core/domain/entity/pause_entity.dart';
 import '../../../../core/utils/constants/app_color.dart';
 
 class Pause extends StatelessWidget {
-  final String cause;
-  final String date;
-  final String type;
-  final bool approved;
+  final PauseEntity pause;
 
   const Pause({
     super.key,
-    required this.cause,
-    required this.date,
-    required this.type,
-    required this.approved,
+    required this.pause,
   });
 
   @override
@@ -37,17 +33,17 @@ class Pause extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                cause,
+                pause.description,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.black.withOpacity(0.4),
                     ),
               ),
               Text(
-                date,
+                "${DateFormat('d MMMM yyyy', 'fr_FR').format(pause.from)} - ${DateFormat('d MMMM yyyy', 'fr_FR').format(pause.to)}",
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
               Text(
-                type,
+                pause.reason,
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w500,
                       color: AppColor.blue1,
@@ -65,14 +61,14 @@ class Pause extends StatelessWidget {
                   vertical: 4.h,
                 ),
                 decoration: BoxDecoration(
-                  color: approved ? const Color(0x3A67CE67) : AppColor.red2,
+                  color: pause.status == "APPROUVE" ? const Color(0x3A67CE67) : AppColor.red2,
                   borderRadius: BorderRadius.circular(4.r),
                 ),
                 child: Text(
-                  approved ? 'Approuvé' : 'Non Approuvé',
+                  pause.status == "APPROUVE" ? 'Approuvé' : 'Non Approuvé',
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w500,
-                        color: approved ? AppColor.green1 : AppColor.red1,
+                        color: pause.status == "APPROUVE" ? AppColor.green1 : AppColor.red1,
                       ),
                 ),
               ),

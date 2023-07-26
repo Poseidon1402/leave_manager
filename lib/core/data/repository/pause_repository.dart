@@ -10,7 +10,7 @@ class PauseRepository {
   }
 
   Future<List<PauseEntity>> getAllPauses() async {
-    final docs = (await _firestore.where('status', isNotEqualTo: 'EN ATTENTE').get()).docs;
+    final docs = (await _firestore.get()).docs;
 
     final List<PauseEntity> pauses = [];
 

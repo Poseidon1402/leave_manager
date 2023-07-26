@@ -27,6 +27,7 @@ class PauseBloc extends Bloc<PauseFetchingEvent, PauseState> {
     } on SocketException {
       emit(PauseState.networkError());
     } catch (e) {
+      print(e);
       emit(PauseState.error());
     }
   }

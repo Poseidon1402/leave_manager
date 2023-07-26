@@ -19,10 +19,10 @@ class UserEntity {
 
   factory UserEntity.fromJson(Map<String, dynamic> json)
     => UserEntity(
-        fullName: json['name'],
+        fullName: json['fullName'],
         email: json['email'],
         quota: json['quota'],
-        phone: json['tel'],
+        phone: json['phone'],
         role: json['role'],
         department: DepartmentEntity.fromJson(json['department']),
       );
