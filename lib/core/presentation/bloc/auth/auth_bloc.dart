@@ -39,6 +39,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         emit(const AuthState.error('Une erreur est survenue.'));
       }
     } catch (e) {
+      print(e);
       emit(const AuthState.networkError());
     }
   }

@@ -1,12 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:leave_manager/core/utils/enum/load_status.dart';
 
+import '../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../core/presentation/components/others/app_filter_chip.dart';
 import '../../../core/utils/constants/app_color.dart';
 import 'components/need_approbation.dart';
 
-class AdminApprobScreen extends StatelessWidget {
+class AdminApprobScreen extends StatefulWidget {
   const AdminApprobScreen({super.key});
+
+  @override
+  State<AdminApprobScreen> createState() => _AdminApprobScreenState();
+}
+
+class _AdminApprobScreenState extends State<AdminApprobScreen> {
+  String _department = "Social";
+
+  @override
+  void initState() {
+    context.read<PauseBloc>().add(PauseFetchingEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +59,9 @@ class AdminApprobScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     AppFilterChip(
+                      onSelected: (value) => setState(() => _department = "Social"),
                       width: 90.w,
-                      selected: true,
+                      selected: _department == "Social",
                       label: 'Social',
                       selectedTextColor: AppColor.blue1,
                       textColor: AppColor.grey1,
@@ -52,8 +70,9 @@ class AdminApprobScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                     AppFilterChip(
+                      onSelected: (value) => setState(() => _department = "Informatique"),
                       width: 90.w,
-                      selected: false,
+                      selected: _department == "Informatique",
                       label: 'Informatique',
                       selectedTextColor: AppColor.blue1,
                       textColor: AppColor.grey1,
@@ -62,8 +81,9 @@ class AdminApprobScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                     AppFilterChip(
+                      onSelected: (value) => setState(() => _department = "Commerce"),
                       width: 90.w,
-                      selected: false,
+                      selected: _department == "Commerce",
                       label: 'Commerce',
                       textColor: AppColor.grey1,
                       selectedTextColor: AppColor.blue1,
@@ -112,20 +132,37 @@ class AdminApprobScreen extends StatelessWidget {
                 ),
               ],
             ),
-            const NeedApprobation(
-              name: 'Robert Fox',
-              description: 'À cause de ma santé',
-              reason: 'Malade',
-            ),
-            const NeedApprobation(
-              name: 'Eleanor Pena',
-              description: 'En vacance',
-              reason: 'Vacances',
-            ),
-            const NeedApprobation(
-              name: 'Darlene Robertson',
-              description: 'À cause de ma formation',
-              reason: 'Formation',
+            Expanded(
+              child: BlocBuilder<PauseBloc, PauseState>(
+                  builder: (context, state) {
+                    if(state.status.isLoading) {
+                      return Center(
+                        child: SpinKitRing(
+                          color: AppColor.blue1,
+                          size: 30.sp,
+                        ),
+                      );
+                    } else if(state.status.isSuccess) {
+                      return ListView.builder(
+                        itemCount: state.pauses!.where((pause) => pause.user.department!.name == _department).length,
+                        itemBuilder: (context, index) {
+                          final pauses = state.pauses?.where((pause) => pause.status == "EN ATTENTE").toList();
+
+                          return NeedApprobation(
+                            pause: pauses!.where((pause) => pause.user.department!.name == _department).toList()[index],
+                          );
+                        },
+                      );
+                    } else {
+                      return Center(
+                        child: Text(
+                          'Something went wrong',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      );
+                    }
+                  }
+              ),
             ),
           ],
         ),

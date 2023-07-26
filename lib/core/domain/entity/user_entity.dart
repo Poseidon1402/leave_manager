@@ -2,11 +2,11 @@ import 'department_entity.dart';
 
 class UserEntity {
   final String email;
-  final String fullName;
-  final String phone;
-  final String role;
+  final String? fullName;
+  final String? phone;
+  final String? role;
   final int? quota;
-  final DepartmentEntity department;
+  final DepartmentEntity? department;
 
   UserEntity({
     required this.email,
@@ -24,7 +24,7 @@ class UserEntity {
         quota: json['quota'],
         phone: json['phone'],
         role: json['role'],
-        department: DepartmentEntity.fromJson(json['department']),
+        department: json['department'] != null ? DepartmentEntity.fromJson(json['department']) : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -32,6 +32,6 @@ class UserEntity {
     "email": email,
     "phone": phone,
     "role": role,
-    "department": department.toJson(),
+    "department": department?.toJson(),
   };
 }

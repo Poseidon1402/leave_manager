@@ -5,8 +5,15 @@ import '../../../core/presentation/components/others/app_filter_chip.dart';
 import '../../../core/utils/constants/app_color.dart';
 import 'components/employee_on_vacation.dart';
 
-class VacationsListScreen extends StatelessWidget {
+class VacationsListScreen extends StatefulWidget {
   const VacationsListScreen({super.key});
+
+  @override
+  State<VacationsListScreen> createState() => _VacationsListScreenState();
+}
+
+class _VacationsListScreenState extends State<VacationsListScreen> {
+  String _department = 'Social';
 
   @override
   Widget build(BuildContext context) {
@@ -43,8 +50,9 @@ class VacationsListScreen extends StatelessWidget {
                   children: [
                     AppFilterChip(
                       width: 90.w,
-                      selected: true,
+                      selected: _department == "Social",
                       label: 'Social',
+                      onSelected: (value) => setState(() => _department = "Social"),
                       selectedTextColor: AppColor.blue1,
                       textColor: AppColor.grey1,
                       unselectedBackgroundColor: AppColor.white1,
@@ -53,7 +61,8 @@ class VacationsListScreen extends StatelessWidget {
                     ),
                     AppFilterChip(
                       width: 90.w,
-                      selected: false,
+                      selected: _department == "Informatique",
+                      onSelected: (value) => setState(() => _department = "Informatique"),
                       label: 'Informatique',
                       selectedTextColor: AppColor.blue1,
                       textColor: AppColor.grey1,
@@ -63,7 +72,8 @@ class VacationsListScreen extends StatelessWidget {
                     ),
                     AppFilterChip(
                       width: 90.w,
-                      selected: false,
+                      selected: _department == "Commerce",
+                      onSelected: (value) => setState(() => _department = "Commerce"),
                       label: 'Commerce',
                       textColor: AppColor.grey1,
                       selectedTextColor: AppColor.blue1,

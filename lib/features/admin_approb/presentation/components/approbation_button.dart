@@ -35,7 +35,7 @@ class ApprobationButton extends StatelessWidget {
         color: iconColor,
       ),
       label: Text(
-        'Approuvé',
+        label,
         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: textColor,
               fontWeight: FontWeight.w500,

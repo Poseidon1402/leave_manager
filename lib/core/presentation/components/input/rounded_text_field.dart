@@ -38,6 +38,7 @@ class RoundedTextField extends StatelessWidget {
       keyboardType: keyboardType,
       onTap: onTap,
       controller: controller,
+      style: Theme.of(context).textTheme.bodyMedium,
       decoration: InputDecoration(
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(borderRadius ?? 10.r),
