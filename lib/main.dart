@@ -23,8 +23,10 @@ class LeaveManager extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthBloc()),
+      ],
       child: ScreenUtilInit(
         builder: (context, child) => MaterialApp.router(
           title: 'Za Mandresy',

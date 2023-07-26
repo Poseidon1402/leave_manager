@@ -53,7 +53,7 @@ class _HomeBodyState extends State<HomeBody> {
                       onSelected: (value) {
                         setState(() => _selected = "Tout");
                       },
-                      width: 90.w,
+                      width: 80.w,
                       selected: _selected == "Tout",
                       label: 'Tout',
                       selectedTextColor: Colors.black,

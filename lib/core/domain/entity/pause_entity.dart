@@ -22,8 +22,8 @@ class PauseEntity {
   factory PauseEntity.fromJson(Map<String, dynamic> json)
     => PauseEntity(
         user: UserEntity.fromJson(json['user']),
-        from: DateFormat('MMMM d yyyy', 'fr_FR').parse(json['from']),
-        to: DateFormat('MMMM d yyyy', 'fr_FR').parse(json['to']),
+        from: DateFormat('d MMMM yyyy', 'fr_FR').parse(json['from']),
+        to: DateFormat('d MMMM yyyy', 'fr_FR').parse(json['to']),
         reason: json['reason'],
         description: json['description'],
         status: json['status'],
@@ -31,8 +31,8 @@ class PauseEntity {
 
   Map<String, dynamic> toJson() => {
     "user": user.toJson(),
-    "from": DateFormat('MMMM d yyyy', 'fr_FR').format(from),
-    "to": DateFormat('MMMM d yyyy', 'fr_FR').format(to),
+    "from": DateFormat('d MMMM yyyy', 'fr_FR').format(from),
+    "to": DateFormat('d MMMM yyyy', 'fr_FR').format(to),
     "reason": reason,
     "description": description,
     "status": status,

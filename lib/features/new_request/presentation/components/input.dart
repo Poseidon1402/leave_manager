@@ -6,12 +6,16 @@ import '../../../../core/utils/constants/app_color.dart';
 class Input extends StatelessWidget {
   final String label;
   final TextEditingController? controller;
+  final bool readOnly;
+  final bool showCursor;
   final IconData icon;
 
   const Input({
     super.key,
     required this.label,
     this.controller,
+    this.readOnly = false,
+    this.showCursor = true,
     required this.icon,
   });
 
@@ -19,6 +23,8 @@ class Input extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      showCursor: showCursor,
+      readOnly: readOnly,
       decoration: InputDecoration(
         labelText: label,
         labelStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -51,6 +57,7 @@ class Input extends StatelessWidget {
           ),
         ),
       ),
+      style: Theme.of(context).textTheme.bodyMedium,
       cursorHeight: 25.h,
     );
   }
