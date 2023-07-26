@@ -8,4 +8,16 @@ class PauseRepository {
   Future<void> insert(PauseEntity pause) async {
     await _firestore.add(pause.toJson());
   }
+
+  Future<List<PauseEntity>> getAllPauses() async {
+    final docs = (await _firestore.where('status', isNotEqualTo: 'EN ATTENTE').get()).docs;
+
+    final List<PauseEntity> pauses = [];
+
+    for (var doc in docs) {
+      pauses.add(PauseEntity.fromJson(doc.data()));
+    }
+
+    return pauses;
+  }
 }
