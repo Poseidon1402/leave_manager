@@ -142,23 +142,19 @@ class _VacationsListScreenState extends State<VacationsListScreen> {
                   } else if (state.status.isSuccess) {
                     return ListView.builder(
                       itemCount: state.pauses!
-                              .where((pause) =>
-                                  pause.user.department!.name == _department)
-                              .isNotEmpty
-                          ? state.pauses!
-                              .where((pause) =>
-                                  pause.user.department!.name == _department)
-                              .where((pause) => pause.status == "APPROUVE")
-                              .where((pause) =>
-                                  DateTime.now().isBefore(pause.to) &&
-                                  DateTime.now().isAfter(pause.from))
-                              .length
-                          : 0,
+                          .where((pause) =>
+                              pause.user.department!.name == _department)
+                          .where((pause) => pause.status == "APPROUVE")
+                          .where((pause) =>
+                              DateTime.now().isBefore(pause.to) &&
+                              DateTime.now().isAfter(pause.from))
+                          .length,
                       itemBuilder: (context, index) {
                         final pauses = state.pauses
                             ?.where((pause) => pause.status == "APPROUVE")
-                            .where((pause) => DateTime.now().isBefore(pause.to) &&
-                                    DateTime.now().isAfter(pause.from))
+                            .where((pause) =>
+                                DateTime.now().isBefore(pause.to) &&
+                                DateTime.now().isAfter(pause.from))
                             .toList();
 
                         return EmployeeOnVacation(
