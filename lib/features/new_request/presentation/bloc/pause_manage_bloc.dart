@@ -13,6 +13,7 @@ class PauseManageBloc extends Bloc<PauseManageEvent, PauseManageState> {
 
   PauseManageBloc() : super(PauseManageState.initial()) {
     on<PauseInsertionEvent>(_mapPauseInsertionEventToState);
+    on<PauseUpdateEvent>(_mapPauseUpdateEventToState);
   }
 
   void _mapPauseInsertionEventToState(
@@ -21,6 +22,18 @@ class PauseManageBloc extends Bloc<PauseManageEvent, PauseManageState> {
       emit(PauseManageState.loading());
       await _rep.insert(event.pause);
       emit(PauseManageState.success());
+    } catch (e) {
+      emit(PauseManageState.error());
+    }
+  }
+
+  void _mapPauseUpdateEventToState(
+    PauseUpdateEvent event, Emitter<PauseManageState> emit
+      ) async {
+    try {
+      emit(PauseManageState.loading());
+      await _rep.updateStatus(event.id, event.status);
+      emit(PauseManageState.loading());
     } catch (e) {
       emit(PauseManageState.error());
     }

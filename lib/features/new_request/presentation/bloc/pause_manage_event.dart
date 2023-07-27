@@ -7,3 +7,11 @@ class PauseInsertionEvent extends PauseManageEvent {
 
   PauseInsertionEvent({required this.pause});
 }
+
+class PauseUpdateEvent extends PauseManageEvent {
+
+  final String id;
+  final String status;
+
+  PauseUpdateEvent({required this.id, required this.status});
+}

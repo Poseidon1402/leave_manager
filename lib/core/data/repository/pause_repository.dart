@@ -20,4 +20,8 @@ class PauseRepository {
 
     return pauses;
   }
+
+  Future<void> updateStatus(String id, String status) async {
+    await _firestore.doc(id).update({"status": status});
+  }
 }

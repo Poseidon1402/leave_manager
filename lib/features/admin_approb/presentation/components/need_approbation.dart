@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/domain/entity/pause_entity.dart';
+import '../../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../../core/utils/constants/app_color.dart';
+import '../../../new_request/presentation/bloc/pause_manage_bloc.dart';
 import 'approbation_button.dart';
 
 class NeedApprobation extends StatelessWidget {
@@ -73,7 +76,28 @@ class NeedApprobation extends StatelessWidget {
               children: [
                 ApprobationButton(
                   label: 'Approuver',
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<PauseManageBloc>().add(
+                          PauseUpdateEvent(
+                            id: pause.id as String,
+                            status: 'APPROUVE',
+                          ),
+                        );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppColor.green1,
+                        content: Text(
+                          'La demande a été approuvée',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                    context.read<PauseBloc>().add(PauseFetchingEvent());
+                  },
                   backgroundColor: AppColor.green1.withOpacity(0.15),
                   textColor: AppColor.green1,
                   icon: Icons.check,
@@ -81,7 +105,28 @@ class NeedApprobation extends StatelessWidget {
                 ),
                 ApprobationButton(
                   label: 'Refuser',
-                  onPressed: () {},
+                  onPressed: () {
+                    context.read<PauseManageBloc>().add(
+                          PauseUpdateEvent(
+                            id: pause.id as String,
+                            status: 'REFUSE',
+                          ),
+                        );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppColor.red1,
+                        content: Text(
+                          'La demande a été refusée',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                    context.read<PauseBloc>().add(PauseFetchingEvent());
+                  },
                   backgroundColor: AppColor.red1.withOpacity(0.15),
                   textColor: AppColor.red1,
                   icon: Icons.check,
