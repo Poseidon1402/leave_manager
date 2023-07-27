@@ -9,4 +9,5 @@ abstract class RouteName {
   static const adminApprob = '/admin_approb';
   static const vacations = '/vacations';
   static const search = '/search';
+  static const profile = '/profile';
 }

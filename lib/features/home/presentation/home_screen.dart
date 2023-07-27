@@ -35,11 +35,14 @@ class HomeScreen extends StatelessWidget {
               size: 46.sp,
             ),
           ),
-          CircleAvatar(
-            radius: 47.r,
-            backgroundImage: const CachedNetworkImageProvider(
-              'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmVzc2lvbmFsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
-              scale: 5.0,
+          GestureDetector(
+            onTap: () => context.push(RouteName.profile),
+            child: CircleAvatar(
+              radius: 47.r,
+              backgroundImage: const CachedNetworkImageProvider(
+                'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmVzc2lvbmFsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
+                scale: 5.0,
+              ),
             ),
           ),
         ],

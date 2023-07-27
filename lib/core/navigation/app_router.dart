@@ -4,6 +4,7 @@ import '../../features/admin/presentation/admin_screen.dart';
 import '../../features/auth/presentation/auth_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/new_request/presentation/new_request_screen.dart';
+import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/subscription/presentation/subscription_screen.dart';
 import '../../features/welcome/welcome_screen.dart';
 import '../utils/constants/route_name.dart';
@@ -39,6 +40,10 @@ class AppRouter {
       GoRoute(
         path: RouteName.admin,
         builder: (context, state) => const AdminScreen(),
+      ),
+      GoRoute(
+        path: RouteName.profile,
+        builder: (context, state) => const ProfileScreen(),
       ),
     ],
   );

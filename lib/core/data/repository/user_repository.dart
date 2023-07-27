@@ -8,7 +8,6 @@ class UserRepository {
   Future<UserEntity> getUserByEmail(String email) async {
     final doc = (await _firestore.where('email', isEqualTo: email).get()).docs.first;
 
-    print(doc.data());
     return UserEntity.fromJson(doc.data());
   }
 }
