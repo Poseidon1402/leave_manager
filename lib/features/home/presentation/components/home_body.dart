@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,6 +19,12 @@ class HomeBody extends StatefulWidget {
 
 class _HomeBodyState extends State<HomeBody> {
   String _selected = "Tout";
+
+  @override
+  void initState() {
+    context.read<PauseBloc>().add(PauseFetchingEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,9 +72,9 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                     AppFilterChip(
                       onSelected: (value) {
-                        setState(() => _selected = "Approuvé");
+                        setState(() => _selected = "APPROUVE");
                       },
-                      selected: _selected == "Approuvé",
+                      selected: _selected == "APPROUVE",
                       icon: const Icon(
                         Icons.check,
                         color: Colors.greenAccent,
@@ -79,9 +86,9 @@ class _HomeBodyState extends State<HomeBody> {
                     ),
                     AppFilterChip(
                       onSelected: (value) {
-                        setState(() => _selected = "Non Approuvé");
+                        setState(() => _selected = "REFUSE");
                       },
-                      selected: _selected == "Non Approuvé",
+                      selected: _selected == "REFUSE",
                       icon: const Icon(
                         Icons.close,
                         color: Colors.red,
@@ -99,35 +106,47 @@ class _HomeBodyState extends State<HomeBody> {
               height: 23.h,
             ),
             Expanded(
-              child: BlocBuilder<PauseBloc, PauseState>(
-                bloc: context.read<PauseBloc>()..add(PauseFetchingEvent()),
-                builder: (context, state) {
-                  if(state.status.isLoading) {
-                    return Center(
-                      child: SpinKitRing(
-                        color: AppColor.blue1,
-                        size: 30.sp,
-                      ),
-                    );
-                  } else if(state.status.isSuccess) {
-                    return ListView.builder(
-                      itemCount: state.pauses?.length,
-                      itemBuilder: (context, index) {
-                        return Pause(
-                          pause: state.pauses![index],
-                        );
-                      },
-                    );
-                  } else {
-                    return Center(
-                      child: Text(
-                        'Something went wrong',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    );
-                  }
+              child:
+                  BlocBuilder<PauseBloc, PauseState>(builder: (context, state) {
+                if (state.status.isLoading) {
+                  return Center(
+                    child: SpinKitRing(
+                      color: AppColor.blue1,
+                      size: 30.sp,
+                    ),
+                  );
+                } else if (state.status.isSuccess) {
+                  final allPauses = state.pauses?.where((pause) =>
+                      pause.user.email ==
+                      FirebaseAuth.instance.currentUser?.email);
+                  return ListView.builder(
+                    itemCount: _selected == 'Tout'
+                        ? allPauses?.length
+                        : allPauses
+                            ?.where((pause) => _selected == 'APPROUVE'
+                                ? pause.status == 'APPROUVE'
+                                : pause.status != 'APPROUVE')
+                            .length,
+                    itemBuilder: (context, index) {
+                      final pauses = state.pauses
+                          ?.where((pause) =>
+                              pause.user.email ==
+                              FirebaseAuth.instance.currentUser?.email)
+                          .toList();
+                      return Pause(
+                        pause: pauses![index],
+                      );
+                    },
+                  );
+                } else {
+                  return Center(
+                    child: Text(
+                      'Something went wrong',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  );
                 }
-              ),
+              }),
             ),
           ],
         ),
