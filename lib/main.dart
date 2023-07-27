@@ -9,6 +9,7 @@ import 'app_theme.dart';
 import 'core/navigation/app_router.dart';
 import 'core/presentation/bloc/auth/auth_bloc.dart';
 import 'core/presentation/bloc/pause/pause_bloc.dart';
+import 'features/new_request/presentation/bloc/pause_manage_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,6 +30,9 @@ class LeaveManager extends StatelessWidget {
         BlocProvider(create: (context) => AuthBloc()),
         BlocProvider(
           create: (context) => PauseBloc(),
+        ),
+        BlocProvider(
+          create: (context) => PauseManageBloc(),
         ),
       ],
       child: ScreenUtilInit(

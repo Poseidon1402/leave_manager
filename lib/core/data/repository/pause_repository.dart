@@ -24,4 +24,8 @@ class PauseRepository {
   Future<void> updateStatus(String id, String status) async {
     await _firestore.doc(id).update({"status": status});
   }
+
+  Future<void> deletePause(String id) async {
+    await _firestore.doc(id).delete();
+  }
 }

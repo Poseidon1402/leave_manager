@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/domain/entity/pause_entity.dart';
+import '../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../core/presentation/components/buttons/gradient_button.dart';
 import '../../../core/utils/constants/app_color.dart';
+import '../../new_request/presentation/bloc/pause_manage_bloc.dart';
 import '../../new_request/presentation/components/input.dart';
 
 class PauseDetailScreen extends StatefulWidget {
@@ -30,9 +33,12 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
   @override
   void initState() {
     _causeController = TextEditingController(text: widget.pause.reason);
-    _descriptionController = TextEditingController(text: widget.pause.description);
-    _fromController = TextEditingController(text: DateFormat('d MMMM yyyy', 'fr_FR').format(widget.pause.from));
-    _endController = TextEditingController(text: DateFormat('d MMMM yyyy', 'fr_FR').format(widget.pause.to));
+    _descriptionController =
+        TextEditingController(text: widget.pause.description);
+    _fromController = TextEditingController(
+        text: DateFormat('d MMMM yyyy', 'fr_FR').format(widget.pause.from));
+    _endController = TextEditingController(
+        text: DateFormat('d MMMM yyyy', 'fr_FR').format(widget.pause.to));
     _statusController = TextEditingController(text: widget.pause.status);
     super.initState();
   }
@@ -64,7 +70,9 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
                 'Demander une pause',
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(height: 25.h,),
+              SizedBox(
+                height: 25.h,
+              ),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: ClipRRect(
@@ -103,7 +111,9 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
                               icon: Icons.edit_location_alt_outlined,
                               readOnly: true,
                               showCursor: false,
-                              textColor: _causeController.text == 'APPROUVE' ? AppColor.green1 : AppColor.red1,
+                              textColor: _causeController.text == 'APPROUVE'
+                                  ? AppColor.green1
+                                  : AppColor.red1,
                             ),
                           ],
                         ),
@@ -116,7 +126,21 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
               FractionallySizedBox(
                 widthFactor: 1,
                 child: GradientButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppColor.green1,
+                        content: Text(
+                          'Votre demande a été modifiée',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                  },
                   text: 'MODIFIER LA DEMANDE',
                   fixedHeight: 46.h,
                   fontSize: 12.sp,
@@ -130,7 +154,26 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
               FractionallySizedBox(
                 widthFactor: 1,
                 child: GradientButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context
+                        .read<PauseManageBloc>()
+                        .add(PauseDeleteEvent(id: widget.pause.id!));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        backgroundColor: AppColor.red1,
+                        content: Text(
+                          'Votre demande a été supprimée',
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    color: Colors.white,
+                                  ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    );
+                    context.read<PauseBloc>().add(PauseFetchingEvent());
+                    context.pop();
+                  },
                   text: 'SUPPRIMER LA DEMANDE',
                   fixedHeight: 46.h,
                   fontSize: 12.sp,
@@ -141,7 +184,9 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 35.h,),
+              SizedBox(
+                height: 35.h,
+              ),
             ],
           ),
         ),

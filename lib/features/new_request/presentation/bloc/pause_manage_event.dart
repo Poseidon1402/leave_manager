@@ -15,3 +15,10 @@ class PauseUpdateEvent extends PauseManageEvent {
 
   PauseUpdateEvent({required this.id, required this.status});
 }
+
+class PauseDeleteEvent extends PauseManageEvent {
+
+  final String id;
+
+  PauseDeleteEvent({required this.id});
+}
