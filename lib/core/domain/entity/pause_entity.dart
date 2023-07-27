@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'user_entity.dart';
 
 class PauseEntity {
+  final String? id;
   final UserEntity user;
   final DateTime from;
   final DateTime to;
@@ -11,6 +12,7 @@ class PauseEntity {
   final String status;
 
   PauseEntity({
+    this.id,
     required this.user,
     required this.from,
     required this.to,
@@ -19,8 +21,9 @@ class PauseEntity {
     required this.status,
   });
 
-  factory PauseEntity.fromJson(Map<String, dynamic> json)
+  factory PauseEntity.fromJson(String id, Map<String, dynamic> json)
     => PauseEntity(
+        id: id,
         user: UserEntity.fromJson(json['user']),
         from: DateFormat('d MMMM yyyy', 'fr_FR').parse(json['from']),
         to: DateFormat('d MMMM yyyy', 'fr_FR').parse(json['to']),

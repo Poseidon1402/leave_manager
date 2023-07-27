@@ -15,7 +15,7 @@ class PauseRepository {
     final List<PauseEntity> pauses = [];
 
     for (var doc in docs) {
-      pauses.add(PauseEntity.fromJson(doc.data()));
+      pauses.add(PauseEntity.fromJson(doc.id, doc.data()));
     }
 
     return pauses;
