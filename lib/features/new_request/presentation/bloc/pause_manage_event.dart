@@ -22,3 +22,16 @@ class PauseDeleteEvent extends PauseManageEvent {
 
   PauseDeleteEvent({required this.id});
 }
+
+class PauseUpdateDataEvent extends PauseManageEvent {
+
+  final String id;
+  final String? reason;
+  final String? description;
+
+  PauseUpdateDataEvent({
+    required this.id,
+    this.reason,
+    this.description,
+  });
+}

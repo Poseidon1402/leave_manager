@@ -127,6 +127,13 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
                 widthFactor: 1,
                 child: GradientButton(
                   onPressed: () {
+                    context.read<PauseManageBloc>().add(
+                          PauseUpdateDataEvent(
+                            id: widget.pause.id!,
+                            reason: _causeController.text,
+                            description: _descriptionController.text,
+                          ),
+                        );
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: AppColor.green1,
@@ -140,6 +147,8 @@ class _PauseDetailScreenState extends State<PauseDetailScreen> {
                         ),
                       ),
                     );
+                    context.read<PauseBloc>().add(PauseFetchingEvent());
+                    context.pop();
                   },
                   text: 'MODIFIER LA DEMANDE',
                   fixedHeight: 46.h,

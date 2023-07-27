@@ -28,4 +28,10 @@ class PauseRepository {
   Future<void> deletePause(String id) async {
     await _firestore.doc(id).delete();
   }
+
+  Future<void> update(String id, String? reason, String? description) async {
+    await _firestore
+        .doc(id)
+        .update({"reason": reason, "description": description});
+  }
 }
