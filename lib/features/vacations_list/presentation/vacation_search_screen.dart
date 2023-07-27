@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../core/utils/constants/app_color.dart';
-import 'components/employee_on_vacation.dart';
 
 class VacationSearchScreen extends StatelessWidget {
   const VacationSearchScreen({super.key});
@@ -22,7 +21,7 @@ class VacationSearchScreen extends StatelessWidget {
             SizedBox(
               height: 34.h,
             ),
-            Expanded(
+            /*Expanded(
               child: ListView.builder(
                 itemCount: 5,
                 itemBuilder: (context, index) {
@@ -34,7 +33,7 @@ class VacationSearchScreen extends StatelessWidget {
                   );
                 },
               ),
-            ),
+            ),*/
           ],
         ),
       ),

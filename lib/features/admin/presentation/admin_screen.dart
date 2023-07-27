@@ -1,8 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../core/utils/constants/app_color.dart';
 import '../../admin_approb/presentation/admin_approb_screen.dart';
 import '../../vacations_list/presentation/vacation_search_screen.dart';
@@ -22,6 +24,12 @@ class _AdminScreenState extends State<AdminScreen> {
     VacationsListScreen(),
   ];
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    context.read<PauseBloc>().add(PauseFetchingEvent());
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +71,8 @@ class _AdminScreenState extends State<AdminScreen> {
               showSelectedLabels: false,
               currentIndex: _currentIndex,
               unselectedFontSize: 0.0,
-              onTap: (index) => setState(() => index < 3 ? _currentIndex = index : _currentIndex = 2),
+              onTap: (index) => setState(
+                  () => index < 3 ? _currentIndex = index : _currentIndex = 2),
               items: [
                 BottomNavigationBarItem(
                   icon: Icon(

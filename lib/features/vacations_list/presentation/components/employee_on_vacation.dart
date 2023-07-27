@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 
+import '../../../../core/domain/entity/pause_entity.dart';
 import '../../../../core/presentation/components/buttons/app_elevated_button.dart';
 import '../../../../core/utils/constants/app_color.dart';
 
 class EmployeeOnVacation extends StatelessWidget {
-  final String name;
-  final String reason;
-  final String from;
-  final String to;
+  final PauseEntity pause;
 
   const EmployeeOnVacation({
     super.key,
-    required this.name,
-    required this.reason,
-    required this.from,
-    required this.to,
+    required this.pause,
   });
 
   @override
@@ -45,13 +41,13 @@ class EmployeeOnVacation extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  name,
+                  pause.user.fullName!,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                         fontWeight: FontWeight.w500,
                       ),
                 ),
                 Text(
-                  reason,
+                  pause.reason,
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         fontWeight: FontWeight.w500,
                         color: AppColor.blue1,
@@ -90,7 +86,7 @@ class EmployeeOnVacation extends StatelessWidget {
                                 ),
                           ),
                           TextSpan(
-                            text: '$from ',
+                            text: '${DateFormat('dd MMMM', 'fr_FR').format(pause.from)} ',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium
@@ -109,7 +105,7 @@ class EmployeeOnVacation extends StatelessWidget {
                                 ),
                           ),
                           TextSpan(
-                            text: to,
+                            text: DateFormat('d MMMM', 'fr_FR').format(pause.to),
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyMedium

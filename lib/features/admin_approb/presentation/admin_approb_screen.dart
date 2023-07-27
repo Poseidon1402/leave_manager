@@ -21,12 +21,6 @@ class _AdminApprobScreenState extends State<AdminApprobScreen> {
   String _department = "Social";
 
   @override
-  void initState() {
-    context.read<PauseBloc>().add(PauseFetchingEvent());
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => PauseManageBloc(),
