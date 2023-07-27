@@ -9,6 +9,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../../../../core/domain/entity/pause_entity.dart';
 import '../../../../core/presentation/bloc/auth/auth_bloc.dart';
+import '../../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../../core/presentation/components/buttons/gradient_button.dart';
 import '../../../../core/utils/constants/app_color.dart';
 import '../bloc/pause_manage_bloc.dart';
@@ -44,6 +45,7 @@ class _NewRequestBodyState extends State<NewRequestBody> {
       listenWhen: (previous, current) => previous.status != current.status,
       listener: (context, state) {
         if (state.status.isSuccess) {
+          context.read<PauseBloc>().add(PauseFetchingEvent());
           Alert(
             context: context,
             style: AlertStyle(
@@ -52,7 +54,7 @@ class _NewRequestBodyState extends State<NewRequestBody> {
               isCloseButton: false,
               isOverlayTapDismiss: true,
               descStyle: Theme.of(context).textTheme.bodyMedium!,
-              descTextAlign: TextAlign.start,
+              descTextAlign: TextAlign.center,
               animationDuration: const Duration(milliseconds: 400),
               alertBorder: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6.r),
