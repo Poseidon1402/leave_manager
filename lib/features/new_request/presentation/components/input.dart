@@ -9,6 +9,7 @@ class Input extends StatelessWidget {
   final bool readOnly;
   final bool showCursor;
   final IconData icon;
+  final Color textColor;
 
   const Input({
     super.key,
@@ -16,6 +17,7 @@ class Input extends StatelessWidget {
     this.controller,
     this.readOnly = false,
     this.showCursor = true,
+    this.textColor = Colors.black,
     required this.icon,
   });
 
@@ -57,7 +59,9 @@ class Input extends StatelessWidget {
           ),
         ),
       ),
-      style: Theme.of(context).textTheme.bodyMedium,
+      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+        color: textColor,
+      ),
       cursorHeight: 25.h,
     );
   }

@@ -10,4 +10,5 @@ abstract class RouteName {
   static const vacations = '/vacations';
   static const search = '/search';
   static const profile = '/profile';
+  static const pauseDetail = '/pause_detail';
 }
