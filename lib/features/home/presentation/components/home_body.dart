@@ -126,13 +126,24 @@ class _HomeBodyState extends State<HomeBody> {
                             ?.where((pause) => _selected == 'APPROUVE'
                                 ? pause.status == 'APPROUVE'
                                 : pause.status != 'APPROUVE')
+                            .where((pause) =>
+                                pause.user.email ==
+                                FirebaseAuth.instance.currentUser?.email)
                             .length,
                     itemBuilder: (context, index) {
-                      final pauses = state.pauses
-                          ?.where((pause) =>
-                              pause.user.email ==
-                              FirebaseAuth.instance.currentUser?.email)
-                          .toList();
+                      final pauses = _selected == 'Tout'
+                          ? state.pauses
+                              ?.where((pause) =>
+                                  pause.user.email ==
+                                  FirebaseAuth.instance.currentUser?.email)
+                              .toList()
+                          : allPauses
+                              ?.where((pause) => _selected == 'APPROUVE'
+                                  ? pause.status == 'APPROUVE'
+                                  : pause.status != 'APPROUVE')
+                              .where((pause) =>
+                                  pause.user.email ==
+                                  FirebaseAuth.instance.currentUser?.email).toList();
                       return Pause(
                         pause: pauses![index],
                       );
