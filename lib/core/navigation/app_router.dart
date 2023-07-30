@@ -6,6 +6,7 @@ import '../../features/home/presentation/home_screen.dart';
 import '../../features/new_request/presentation/new_request_screen.dart';
 import '../../features/pause_detail/presentation/pause_detail_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
+import '../../features/scan_qr_code/presentation/scan_qr_code_screen.dart';
 import '../../features/subscription/presentation/subscription_screen.dart';
 import '../../features/welcome/welcome_screen.dart';
 import '../domain/entity/pause_entity.dart';
@@ -54,6 +55,10 @@ class AppRouter {
 
           return PauseDetailScreen(pause: pause);
         },
+      ),
+      GoRoute(
+        path: RouteName.scanCode,
+        builder: (context, state) => const ScanQrCodeScreen(),
       ),
     ],
   );

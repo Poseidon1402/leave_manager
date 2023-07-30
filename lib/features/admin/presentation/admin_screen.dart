@@ -3,9 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/presentation/bloc/pause/pause_bloc.dart';
 import '../../../core/utils/constants/app_color.dart';
+import '../../../core/utils/constants/route_name.dart';
 import '../../admin_approb/presentation/admin_approb_screen.dart';
 import '../../vacations_list/presentation/vacation_search_screen.dart';
 import '../../vacations_list/presentation/vacations_list_screen.dart';
@@ -45,8 +47,16 @@ class _AdminScreenState extends State<AdminScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         actions: [
+          IconButton.outlined(
+            onPressed: () => context.push(RouteName.scanCode),
+            icon: Icon(
+              Icons.qr_code,
+              color: AppColor.blue1,
+              size: 36.sp,
+            ),
+          ),
           CircleAvatar(
-            radius: 47.r,
+            radius: 36.r,
             backgroundImage: const CachedNetworkImageProvider(
               'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8cHJvZmVzc2lvbmFsfGVufDB8fDB8fHww&auto=format&fit=crop&w=500&q=60',
               scale: 5.0,

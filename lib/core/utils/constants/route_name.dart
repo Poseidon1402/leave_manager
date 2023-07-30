@@ -11,4 +11,5 @@ abstract class RouteName {
   static const search = '/search';
   static const profile = '/profile';
   static const pauseDetail = '/pause_detail';
+  static const scanCode = '/scan_code';
 }
