@@ -8,13 +8,14 @@ import '../../features/pause_detail/presentation/pause_detail_screen.dart';
 import '../../features/profile/presentation/profile_screen.dart';
 import '../../features/scan_qr_code/presentation/scan_qr_code_screen.dart';
 import '../../features/subscription/presentation/subscription_screen.dart';
+import '../../features/user_pause_detail/presentation/user_pause_detail_screen.dart';
 import '../../features/welcome/welcome_screen.dart';
 import '../domain/entity/pause_entity.dart';
 import '../utils/constants/route_name.dart';
 
 class AppRouter {
   static GoRouter configurations = GoRouter(
-    initialLocation: RouteName.welcome,
+    initialLocation: RouteName.userPauseDetail,
     routes: [
       GoRoute(
         path: RouteName.welcome,
@@ -59,6 +60,10 @@ class AppRouter {
       GoRoute(
         path: RouteName.scanCode,
         builder: (context, state) => const ScanQrCodeScreen(),
+      ),
+      GoRoute(
+        path: RouteName.userPauseDetail,
+        builder: (context, state) => const UserPauseDetailScreen(),
       ),
     ],
   );
