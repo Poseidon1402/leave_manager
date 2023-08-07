@@ -10,6 +10,7 @@ import '../../../../core/data/repository/user_repository.dart';
 import '../../../../core/presentation/components/buttons/app_outlined_button.dart';
 import '../../../../core/presentation/components/buttons/gradient_button.dart';
 import '../../../../core/utils/constants/app_color.dart';
+import '../../../../core/utils/constants/route_name.dart';
 
 class ScanQrCodeBody extends StatefulWidget {
   const ScanQrCodeBody({super.key});
@@ -219,7 +220,7 @@ class _ScanQrCodeBodyState extends State<ScanQrCodeBody> {
                         borderRadius: 8.r,
                       ),
                       GradientButton(
-                        onPressed: () {},
+                        onPressed: () => context.push(RouteName.userPauseDetail),
                         fixedHeight: 38.h,
                         colors: const [
                           AppColor.blue2,

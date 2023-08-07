@@ -15,7 +15,7 @@ import '../utils/constants/route_name.dart';
 
 class AppRouter {
   static GoRouter configurations = GoRouter(
-    initialLocation: RouteName.userPauseDetail,
+    initialLocation: RouteName.welcome,
     routes: [
       GoRoute(
         path: RouteName.welcome,
